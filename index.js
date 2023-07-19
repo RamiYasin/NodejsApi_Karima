@@ -1,7 +1,13 @@
 const express = require("express"); // standared
+const cors = require('cors');
 const app = express(); // standared
+const bodyParser = require('body-parser');
 
 const db =require("mysql");
+app.use(cors());
+
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 // create connection to MySQL database
 const connection = db.createConnection(
@@ -35,6 +41,27 @@ app.get('/users',(req,res)=>{
       });
 });
 
+app.post('/useradd',(req,res)=>{
+
+const {username, password} = req.body;
+
+//const username = req.body;
+//const password = req.body;
+
+    const sql ='INSERT INTO mosta5dem (username, password) VALUES (?,?)'; //sql query with parameters
+    connection.query(sql,[username, password],(err,result) =>{      //add the parameters as a array
+      if(err){
+          console.log(err);
+          return;
+      }
+      res.status(200).json(result);    // res is the way how to respone the data
+    });
+
+});
+
+//app.put();  // to edit the Data    as home work
+
+//app.delete(); // to delete the data  as home work
 
 app.listen(3000,()=>{
     console.log("server is running")

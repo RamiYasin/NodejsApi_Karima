@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Success Page</title>
+</head>
+<body>
+  <h1>Data Received:</h1>
+  <div>
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const email = urlParams.get('email');
+      const password = urlParams.get('password');
+
+      // Display the data on the page
+      document.write(`<p>Email: ${email}</p>`);
+      document.write(`<p>Password: ${password}</p>`);
+    </script>
+  </div>
+</body>
+</html>
